@@ -5,13 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Briscola"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
-    <Grid>
-        <Button Name="btn" Height="75" Width="175" Margin="0,0,0,600" Background="White" BorderBrush="Red" BorderThickness="2" FontSize="36" Click="Button_Click">Test</Button>
-        <ListBox Name="Listbox" Height="500" Width="500" Margin="0,0,250,0"></ListBox>
-        <Image Name="Image" Width="228px" Height="316px" Margin="525,0,0,0"/>
+        ResizeMode="NoResize"
+        Title="MainWindow" Height="600" Width="900">
 
-        <Label Name="lblG1Punti" FontSize="72" VerticalAlignment="Top" HorizontalAlignment="Right" Width="130" Height="100" Visibility="Visible"></Label>
-        <Label Name="lblG2Punti" FontSize="72" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="130" Height="100" Visibility="Visible"></Label>
+    <Grid>
+        <!-- Definizione Grid -->
+
+        <!-- Colonne -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="85.5px"/>
+            <ColumnDefinition Width="85.5px"/>
+            <ColumnDefinition Width="85.5px"/>
+            <ColumnDefinition Width="85.5px"/>
+            <ColumnDefinition Width="85.5px"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="85.5px"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Righe -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="60px"/>
+            <RowDefinition Height="60px"/>
+            <RowDefinition Height="60px"/>
+            <RowDefinition Height="60px"/>
+            <RowDefinition Height="60px"/>
+            <RowDefinition Height="60px"/>
+            <RowDefinition Height="60px"/>
+            <RowDefinition Height="60px"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Titolo -->
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="7" FontSize="36" FontFamily="Times new roman" VerticalContentAlignment="Center" HorizontalAlignment="Center" Foreground="LightBlue" Margin="0,3,3,0">Briscola</Label>
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="7" FontSize="36" FontFamily="Times new roman" VerticalContentAlignment="Center" HorizontalAlignment="Center" Foreground="RoyalBlue">Briscola</Label>
+
+        <!-- Carte dell'avversario -->
+        <Image Name="img0" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Source="carte/legend.png"></Image>
+        <Image Name="img1" Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Source="carte/legend.png"></Image>
+        <Image Name="img2" Grid.Row="2" Grid.Column="6" Grid.RowSpan="2" Source="carte/legend.png"></Image>
+
+        <!-- Carte utente -->
+        <Button Name="btn0" Grid.Row="8" Grid.Column="2" Grid.RowSpan="2" Background="Transparent" Click="btn_Click">
+            <Button.Content>
+                <Image Source="carte/_b.1.png" Stretch="UniformToFill"></Image>
+            </Button.Content>
+        </Button>
+
+        <Button Name="btn1" Grid.Row="8" Grid.Column="4" Grid.RowSpan="2" Background="Transparent" Click="btn_Click">
+            <Button.Content>
+                <Image Source="carte/_b.2.png" Stretch="UniformToFill"></Image>
+            </Button.Content>
+        </Button>
+
+        <Button Name="btn2" Grid.Row="8" Grid.Column="6" Grid.RowSpan="2" Background="Transparent" Click="btn_Click">
+            <Button.Content>
+                <Image Source="carte/_b.3.png" Stretch="UniformToFill"></Image>
+            </Button.Content>
+        </Button>
+
+        <!-- Mazzo e Briscola -->
+        <Image Name="img_briscola" Grid.Row="4" Grid.RowSpan="3" Grid.Column="7" Source="carte/_d.2.png" RenderTransformOrigin="0.5,0.5" Height="120px" Width="90px" Margin="13,60,59,0" Grid.ColumnSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="270"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Name="imgMazzo" Grid.Row="5" Grid.Column="8" Grid.RowSpan="2" Source="carte/legend.png"></Image>
+
+        <!-- PlaceHolder Images -->
+        <Image Name="img_placeholder1" Grid.Row="5" Grid.Column="3" Grid.RowSpan="2"></Image>
+        <Image Name="img_placeholder2" Grid.Row="5" Grid.Column="5" Grid.RowSpan="2"></Image>
+        
+        <!-- TextBlock Presa -->
+        <TextBlock Name="tbx_presa" Grid.Row="9" Grid.Column="7" Grid.ColumnSpan="3" TextWrapping="Wrap" FontSize="26" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="times new roman" Margin="0,0,10,0"></TextBlock>
+        
+        <!-- Debug -->
+        <ListBox Name="lbl_debugAi" Grid.Row="0" Grid.Column="8" Grid.RowSpan="4" Grid.ColumnSpan="2"></ListBox>
+        <ListBox Name="lbl_debugGiocatore" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="2"></ListBox>
+        
     </Grid>
 </Window>

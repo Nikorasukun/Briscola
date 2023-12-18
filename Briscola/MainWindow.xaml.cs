@@ -22,35 +22,55 @@ namespace Briscola
     /// </summary>
     public partial class MainWindow : Window
     {
-        int n;
-        Mazzo m;
         Partita p;
 
         public MainWindow()
         {
             InitializeComponent();
-            n = 0;
-            p = new Partita();
+            p = new Partita(this);
+            Start();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Start()
         {
-            /*
-            if (n++ == 0) { m = new Mazzo(); }
-            else { n--; m.Shuffle(); }
-
-            Listbox.Items.Clear();
-            Listbox.Items.Add(m);
-
-            Image.Source = null;
-            Image.Source = new BitmapImage(new Uri($"{m.ListaCarte[0].Percorso}", UriKind.RelativeOrAbsolute));
-            */
-
-            string punti1, punti2;
-            btn.Content = p.AvvioPartita(out punti1, out punti2);
-            lblG1Punti.Content = punti1;
-            lblG2Punti.Content= punti2;            
+            p.AvvioPartita();
+            Debug();
         }
 
+        private async void btn_Click(object sender, RoutedEventArgs e)
+        {
+            if(p.ts.Task.Status != TaskStatus.RanToCompletion)
+            {
+                //registro la carta giocata dal giocatore
+                p.InputGiocatore = p.giocatore.Mano[int.Parse(((Button)sender).Name.Substring(3))];
+
+                //rimuovo la carta dalla mano effettiva del giocatore
+                p.giocatore.Mano.RemoveAt(int.Parse(((Button)sender).Name.Substring(3)));
+
+                //setto l'immagine a vuota
+                ((Button)sender).Content = null;
+
+                //dico all'altro threade di proseguire
+                p.ts.SetResult();
+            }
+        }
+
+        internal void Debug()
+        {
+            lbl_debugAi.Items.Clear();
+            for (int i = 0; i < p.ai.Mano.Count; i++)
+            {
+                lbl_debugAi.Items.Add(p.ai.Mano[i].ToString());
+            }
+            lbl_debugAi.Items.Add(p.ai.Punti.ToString() + " Punti");
+            lbl_debugAi.Items.Add(p.carteGiocate.ToString());
+
+            lbl_debugGiocatore.Items.Clear();
+            for (int i = 0; i < p.giocatore.Mano.Count; i++)
+            {
+                lbl_debugGiocatore.Items.Add(p.giocatore.Mano[i].ToString());
+            }
+            lbl_debugGiocatore.Items.Add(p.giocatore.Punti.ToString() + " Punti");
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace Briscola.Models
         public int Punti { get; set; }      //i punti del giocatore, conoscendo anche solo questi possiamo caprie chi ha vinto
 
         public List<Carta> Mano { get; set; }   //la mano del giocatore
+        public bool Presa { get; set; }
 
         //costruttore
         public Giocatore(int numero, string nome)
@@ -21,6 +22,7 @@ namespace Briscola.Models
             this.Numero = numero;
             this.Nome = nome;
             this.Mano = new List<Carta>();
+            this.Presa = false;
         }
 
         //riempie la mano

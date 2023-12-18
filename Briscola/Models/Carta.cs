@@ -99,9 +99,7 @@ namespace Briscola.Models
         public static bool operator >(Carta c1, Carta c2)
         {
             if (c1.Seme != c2.Seme) return true;
-            if (c1.Numero == 1 && c2.Numero != 1) return true;
-            if (c1.Numero == 3 && c2.Numero != 1 && c2.Numero != 3) return true;
-            if (c1.Numero > c2.Numero) return true;
+            if (c1.Punteggio > c2.Punteggio) return true;
 
             return false;
         }
@@ -109,9 +107,7 @@ namespace Briscola.Models
         public static bool operator <(Carta c1, Carta c2)
         {
             if (c1.Seme != c2.Seme) return false;
-            if (c1.Numero == 1 && c2.Numero != 1) return false;
-            if (c1.Numero == 3 && c2.Numero != 1 && c2.Numero != 3) return false;
-            if (c1.Numero > c2.Numero) return true;
+            if (c1.Punteggio > c2.Punteggio) return false;
 
             return true;
         }
@@ -121,8 +117,8 @@ namespace Briscola.Models
         public int Confronto(Carta c, string SemeBriscola)
         {
             //Briscola vs Briscola
-            if (this.Seme == SemeBriscola && c.Seme == SemeBriscola && this.Numero > c.Numero) return 1;
-            if (this.Seme == SemeBriscola && c.Seme == SemeBriscola && this.Numero < c.Numero) return 2;
+            if (this.Seme == SemeBriscola && c.Seme == SemeBriscola && this.Punteggio > c.Punteggio) return 1;
+            if (this.Seme == SemeBriscola && c.Seme == SemeBriscola && this.Punteggio < c.Punteggio) return 2;
 
             //Briscola vs Normale
             if (this.Seme == SemeBriscola && c.Seme != SemeBriscola) return 1;
