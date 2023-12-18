@@ -238,7 +238,7 @@ namespace Briscola.Models
                     break;
 
                 case 1:
-                    Vittoria = $"Vittora {giocatore.Nome}.";
+                    Vittoria = $"Vittoria {giocatore.Nome}.";
                     break;
 
                 case 2:
